@@ -1,0 +1,24 @@
+[filament_switch_sensor switch_sensor]
+switch_pin: gpio29
+pause_on_runout: False
+runout_gcode:
+  PAUSE # [pause_resume] is required in printer.cfg
+  M117 Filament switch runout
+insert_gcode:
+  M117 Filament switch inserted
+
+[filament_motion_sensor encoder_sensor]
+switch_pin: gpio16
+detection_length: 20
+extruder: extruder
+pause_on_runout: False
+runout_gcode:
+  PAUSE # [pause_resume] is required in printer.cfg
+  M117 Filament encoder runout
+insert_gcode:
+  M117 Filament encoder inserted
+
+[delayed_gcode DISABLEFILAMENTSENSOR]   
+initial_duration: 60
+gcode:
+    SET_FILAMENT_SENSOR SENSOR=encoder_sensor ENABLE=0 
